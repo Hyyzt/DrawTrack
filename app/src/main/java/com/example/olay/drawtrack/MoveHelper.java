@@ -84,7 +84,6 @@ public class MoveHelper {
         resultLayer = new GraphicsLayer();
         mMapView.addLayer(resultLayer);
         point = pointList.get(0);
-        //11
         ClickList.add(pointList.get(index));
     }
 
