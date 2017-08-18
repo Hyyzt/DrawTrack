@@ -78,7 +78,6 @@ public class MoveHelper {
         mMapView.addLayer(carLayer);
         color1 = Color.YELLOW;
         color2 = Color.GRAY;
-        drawCar();
         drawLayer = new GraphicsLayer();
         mMapView.addLayer(drawLayer);
         resultLayer = new GraphicsLayer();
