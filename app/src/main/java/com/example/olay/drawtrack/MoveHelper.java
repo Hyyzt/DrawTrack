@@ -40,7 +40,6 @@ public class MoveHelper {
     private GraphicsLayer carLayer;
     private Graphic carGraphic;
     private GraphicsLayer drawLayer;
-    //
     private Point point;
     private GraphicsLayer resultLayer;
     private Context mainActivity;
