@@ -1,9 +1,6 @@
 package com.example.olay.drawtrack;
 
-import android.util.Log;
-
 import com.esri.core.geometry.Point;
-
 
 /**
  * 数据类
