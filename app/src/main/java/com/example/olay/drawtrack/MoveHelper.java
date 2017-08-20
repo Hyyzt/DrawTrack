@@ -22,6 +22,7 @@ import com.esri.core.symbol.SimpleMarkerSymbol;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * 轨迹绘制动画类
@@ -29,7 +30,6 @@ import java.util.List;
  */
 
 public class MoveHelper {
-
     private MapView mMapView;
     private List<Data> list;
     private List<Point> pointList = new ArrayList<>();
@@ -97,39 +97,40 @@ public class MoveHelper {
                 for (int i = 0; i < ClickList.size(); i++) {
                     Point p = ClickList.get(i);
                     if (Math.abs(p.getX() - wgsPoint.getX()) < 0.001 && Math.abs(p.getY() - wgsPoint.getY()) < 0.001) {
-                        // String timeInterval = getTimeInterval(i);
-                        myCallOut.show(wgs2(ClickList.get(i)), list.get(i).data);
+                        String timeInterval = getTimeInterval(i);
+                        myCallOut.show(wgs2(ClickList.get(i)), timeInterval);
                         break;
                     }
                 }
             }
         });
     }
-//计算时间间隔
-//    private String getTimeInterval(int index) {
-//        String startTime = list.get(index).data;
-//        String endTime;
-//        //开始遍历
-//        Stack<Data> stack = new Stack<>();
-//        stack.add(list.get(index));
-//        for (int i = index; i < list.size() - 1; i++) {
-//            if (Math.abs(pointList.get(i).getX() - pointList.get(i + 1).getX()) < 0.0001
-//                    && Math.abs(pointList.get(i).getY() - pointList.get(i + 1).getY()) < 0.0001) {
-//                //前后两个点相同
-//                stack.add(list.get(i + 1));
-//            } else {
-//                //前后2个点不同
-//                break;
-//            }
-//        }
-//        if (stack.size() > 1) {
-//            endTime = stack.pop().data;
-//            stack.removeAllElements();
-//            return startTime + "---" + endTime;
-//        } else {
-//            return startTime;
-//        }
-//    }
+
+    //计算时间间隔
+    private String getTimeInterval(int index) {
+        String startTime = list.get(index).data;
+        String endTime;
+        //开始遍历
+        Stack<Data> stack = new Stack<>();
+        stack.add(list.get(index));
+        for (int i = index; i < list.size() - 1; i++) {
+            if (Math.abs(pointList.get(i).getX() - pointList.get(i + 1).getX()) < 0.0001
+                    && Math.abs(pointList.get(i).getY() - pointList.get(i + 1).getY()) < 0.0001) {
+                //前后两个点相同
+                stack.add(list.get(i + 1));
+            } else {
+                //前后2个点不同
+                break;
+            }
+        }
+        if (stack.size() > 1) {
+            endTime = stack.pop().data;
+            stack.removeAllElements();
+            return startTime + "---" + endTime;
+        } else {
+            return startTime;
+        }
+    }
 
     //画跟随物
     private void drawCar() {
