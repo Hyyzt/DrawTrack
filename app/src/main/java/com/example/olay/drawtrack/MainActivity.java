@@ -38,23 +38,17 @@ public class MainActivity extends Activity {
         mMapView.setExtent(envelope);
         //初始化MoveHelper时的参数 Context,MapView,List<Bean>
         moveHelper = new MoveHelper(this, mMapView, list);
-        //移动时的图标(***必须设置),正在移动时轨迹的颜色，移动结束后轨迹的颜色
-        moveHelper.setIconAndColor(R.drawable.point, Color.YELLOW, Color.GRAY);
-        //判断是否移动的精度，默认0.0001
-        moveHelper.setPrecision(0.0001);
-        //是否跟随，默认false
-        moveHelper.setFellow(false);
-        //设置整个动画的时间，***必须设置
-        moveHelper.setTime(40);
-        //设置底图的空间参考,默认为3857,若参数和底图不一致，绘制会出现偏差
-        moveHelper.setSpatialReference(SpatialReference.create(3857));
-        //在整个动画结束后的逻辑，在OnFinish()里完成
-        moveHelper.setOnDraw(new MoveHelper.onDraw() {
-            @Override
-            public void onFinish() {
+        moveHelper.setSpatialReference(SpatialReference.create(3857))
+                .setIconAndColor(R.drawable.point, Color.YELLOW, Color.GRAY)
+                .setPrecision(0.0001)
+                .setFellow(false)
+                .setTime(40)
+                .setOnDraw(new MoveHelper.onDraw() {
+                    @Override
+                    public void onFinish() {
 
-            }
-        });
+                    }
+                });
         //开始动画，在开始动画前，必须进行必要参数的设置
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

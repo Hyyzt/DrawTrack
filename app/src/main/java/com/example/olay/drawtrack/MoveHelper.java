@@ -61,12 +61,13 @@ public class MoveHelper {
     private int color1, color2;
 
     //设置icon和颜色
-    public void setIconAndColor(int iconId, int color1, int color2) {
+    public MoveHelper setIconAndColor(int iconId, int color1, int color2) {
         //传入context,进行屏幕适配，否则图标会失真
         this.car = new PictureMarkerSymbol(mainActivity, mainActivity.getDrawable(iconId));
         this.color1 = color1;
         this.color2 = color2;
         drawCar();
+        return this;
     }
 
     //初始化
@@ -164,13 +165,15 @@ public class MoveHelper {
 
     private onDraw onDraw;
 
-    public void setOnDraw(onDraw onDraw) {
+    public MoveHelper setOnDraw(onDraw onDraw) {
         this.onDraw = onDraw;
+        return this;
     }
 
     //是否跟随模式，默认为否
-    public void setFellow(boolean fellow) {
+    public MoveHelper setFellow(boolean fellow) {
         isFellow = fellow;
+        return this;
     }
 
     private int Time = 0;
@@ -178,9 +181,10 @@ public class MoveHelper {
     private double a = 0;
 
     //整个动画完成的时间
-    public void setTime(int time) {
+    public MoveHelper setTime(int time) {
         this.Time = time;
         a = (Time / pointList.size()) * 10;
+        return this;
     }
 
     //画动画的线，在每一段完成后，移除
@@ -211,9 +215,10 @@ public class MoveHelper {
     private boolean isPause = false;
 
     //开始动画
-    public void start() {
+    public MoveHelper start() {
         isPause = false;
         draw();
+        return this;
     }
 
     //暂停
@@ -226,8 +231,9 @@ public class MoveHelper {
     private double precision = 0.0001;
 
     //默认0.001
-    public void setPrecision(double precision) {
+    public MoveHelper setPrecision(double precision) {
         this.precision = precision;
+        return this;
     }
 
     //开始绘制
@@ -295,7 +301,10 @@ public class MoveHelper {
 
     private SpatialReference spatialReference = SpatialReference.create(3857);
 
-    public void setSpatialReference(SpatialReference spatialReference) {
+    public MoveHelper setSpatialReference(SpatialReference spatialReference) {
         this.spatialReference = spatialReference;
+        return this;
     }
+
+    private MoveHelper moveHelper;
 }
