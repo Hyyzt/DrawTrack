@@ -37,13 +37,13 @@ public class MainActivity extends Activity {
         Envelope envelope = new Envelope(list.get(0).point, 1000, 1000);
         mMapView.setExtent(envelope);
         //初始化MoveHelper时的参数 Context,MapView,List<Bean>
-        moveHelper = new MoveHelper(this, mMapView, list);
-        moveHelper.setSpatialReference(SpatialReference.create(3857))
-                .setIconAndColor(R.drawable.point, Color.YELLOW, Color.GRAY)
-                .setPrecision(0.0001)
-                .setFellow(false)
-                .setTime(40)
-                .setOnDraw(new MoveHelper.onDraw() {
+        moveHelper = new MoveHelper(this, mMapView, list)
+                .SpatialReference(SpatialReference.create(3857))
+                .IconAndColor(R.drawable.point, Color.YELLOW, Color.GRAY)
+                .Precision(0.0001)
+                .Fellow(false)
+                .Time(15)
+                .OnDraw(new MoveHelper.onDraw() {
                     @Override
                     public void onFinish() {
 
@@ -64,7 +64,6 @@ public class MainActivity extends Activity {
             }
         });
     }
-
 
     public void getList() {
         list = new ArrayList<>();
@@ -87,17 +86,17 @@ public class MainActivity extends Activity {
         list.add(new Data("2017-08-17 17:46:00", new Point(116.325255, 40.043489)));
         list.add(new Data("2017-08-17 17:56:00", new Point(116.325255, 40.043489)));
         list.add(new Data("2017-08-17 18:16:00", new Point(116.325255, 40.043489)));
-        list.add(new Data("2017-08-17 18:26:00", new Point(116.325255, 40.043489)));
-        list.add(new Data("2017-08-17 18:36:00", new Point(116.290544, 40.040134)));
-        list.add(new Data("2017-08-17 18:46:00", new Point(116.286951, 40.039968)));
-        list.add(new Data("2017-08-17 18:56:00", new Point(116.279028, 40.038697)));
-        list.add(new Data("2017-08-17 19:16:00", new Point(116.271626, 40.03722)));
-        list.add(new Data("2017-08-17 19:26:00", new Point(116.272237, 40.030659)));
-        list.add(new Data("2017-08-17 19:36:00", new Point(116.27344, 40.024706)));
-        list.add(new Data("2017-08-17 19:46:00", new Point(116.273584, 40.017882)));
-        list.add(new Data("2017-08-17 19:56:00", new Point(116.276477, 40.013724)));
-        list.add(new Data("2017-08-17 20:06:00", new Point(116.276477, 40.013724)));
-        list.add(new Data("2017-08-17 20:16:00", new Point(116.272057, 40.004509)));
-        list.add(new Data("2017-08-17 20:26:00", new Point(116.269721, 40.002091)));
+//        list.add(new Data("2017-08-17 18:26:00", new Point(116.325255, 40.043489)));
+//        list.add(new Data("2017-08-17 18:36:00", new Point(116.290544, 40.040134)));
+//        list.add(new Data("2017-08-17 18:46:00", new Point(116.286951, 40.039968)));
+//        list.add(new Data("2017-08-17 18:56:00", new Point(116.279028, 40.038697)));
+//        list.add(new Data("2017-08-17 19:16:00", new Point(116.271626, 40.03722)));
+//        list.add(new Data("2017-08-17 19:26:00", new Point(116.272237, 40.030659)));
+//        list.add(new Data("2017-08-17 19:36:00", new Point(116.27344, 40.024706)));
+//        list.add(new Data("2017-08-17 19:46:00", new Point(116.273584, 40.017882)));
+//        list.add(new Data("2017-08-17 19:56:00", new Point(116.276477, 40.013724)));
+//        list.add(new Data("2017-08-17 20:06:00", new Point(116.276477, 40.013724)));
+//        list.add(new Data("2017-08-17 20:16:00", new Point(116.272057, 40.004509)));
+//        list.add(new Data("2017-08-17 20:26:00", new Point(116.269721, 40.002091)));
     }
 }

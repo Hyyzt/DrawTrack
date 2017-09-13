@@ -61,7 +61,7 @@ public class MoveHelper {
     private int color1, color2;
 
     //设置icon和颜色
-    public MoveHelper setIconAndColor(int iconId, int color1, int color2) {
+    public MoveHelper IconAndColor(int iconId, int color1, int color2) {
         //传入context,进行屏幕适配，否则图标会失真
         this.car = new PictureMarkerSymbol(mainActivity, mainActivity.getDrawable(iconId));
         this.color1 = color1;
@@ -165,23 +165,23 @@ public class MoveHelper {
 
     private onDraw onDraw;
 
-    public MoveHelper setOnDraw(onDraw onDraw) {
+    public MoveHelper OnDraw(onDraw onDraw) {
         this.onDraw = onDraw;
         return this;
     }
 
     //是否跟随模式，默认为否
-    public MoveHelper setFellow(boolean fellow) {
+    public MoveHelper Fellow(boolean fellow) {
         isFellow = fellow;
         return this;
     }
 
-    private int Time = 0;
+    private double Time = 0;
     //每一段动画完成的时间
     private double a = 0;
 
     //整个动画完成的时间
-    public MoveHelper setTime(int time) {
+    public MoveHelper Time(double time) {
         this.Time = time;
         a = (Time / pointList.size()) * 10;
         return this;
@@ -190,6 +190,7 @@ public class MoveHelper {
     //画动画的线，在每一段完成后，移除
     public void drawLines(int index) {
         carLayer.removeAll();
+        Log.e("TAG", "drawLines: " + index);
         speedX = (pointList.get(index + 1).getX() - pointList.get(index).getX()) / a;
         speedY = (pointList.get(index + 1).getY() - pointList.get(index).getY()) / a;
         Log.e("TAG", speedX + "," + speedY);
@@ -231,7 +232,7 @@ public class MoveHelper {
     private double precision = 0.0001;
 
     //默认0.001
-    public MoveHelper setPrecision(double precision) {
+    public MoveHelper Precision(double precision) {
         this.precision = precision;
         return this;
     }
@@ -244,15 +245,14 @@ public class MoveHelper {
             if (Math.abs(pointList.get(index).getX() - pointList.get(index + 1).getX()) < precision
                     && Math.abs(pointList.get(index).getY() - pointList.get(index + 1).getY()) < precision) {
                 //前一个点和后一个点没有变化，原地跳动
+                drawLines(index);
                 index++;
                 myCallOut.show(wgs2(pointList.get(index)), list.get(index).data);
                 time = 0;
                 ClickList.add(pointList.get(index));
-                drawLines(index);
                 handler.sendEmptyMessageDelayed(0, 1000);
             } else {
-                if (Math.abs(point.getX() - pointList.get(index + 1).getX()) < 0.000001
-                        && Math.abs(point.getY() - pointList.get(index + 1).getY()) < 0.000001) {
+                if (IsEquals(point, pointList.get(index))) {
                     //上一段动画完成
                     showResult(pointList.get(index), pointList.get(index + 1));
                     index++;
@@ -271,6 +271,16 @@ public class MoveHelper {
                 drawLines(index);
                 handler.sendEmptyMessageDelayed(0, 100);
             }
+        }
+    }
+
+    public boolean IsEquals(Point point, Point po) {
+        double x = po.getX() - point.getX();
+        double y = po.getY() - point.getY();
+        if ((-x < speedX && -y < speedY) || (x < precision && y < precision)) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -301,7 +311,7 @@ public class MoveHelper {
 
     private SpatialReference spatialReference = SpatialReference.create(3857);
 
-    public MoveHelper setSpatialReference(SpatialReference spatialReference) {
+    public MoveHelper SpatialReference(SpatialReference spatialReference) {
         this.spatialReference = spatialReference;
         return this;
     }
